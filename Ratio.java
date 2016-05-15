@@ -9,6 +9,81 @@ package test;
 public class Ratio {
 	private long denom;
 	private long numer;
+
+	/**
+	 * Test if is less than
+	 */
+	public boolean isLessThan(Ratio x) {
+		Ratio n = subtract(x);
+		return (n.getNumerator() < 0);
+	}
+	
+	/**
+	 * Test if less than for whole numbers
+	 * @param x
+	 * @return
+	 */
+	public boolean isLessThan(long x) {
+		Ratio n = new Ratio(x);
+		return isLessThan(n);
+	}
+
+	/**
+	 * Test if greater than for other fractions
+	 * @param x
+	 * @return
+	 */
+	public boolean isGreaterThan(Ratio x) {
+		Ratio n = subtract(x);
+		return (n.getNumerator() > 0);
+	}
+	
+	/**
+	 * Test if greater than for whole numbers
+	 * @param x
+	 * @return
+	 */
+	public boolean isGreaterThan(long x) {
+		Ratio n = new Ratio(x);
+		return isGreaterThan(n);
+	}
+	
+	/**
+	 * Test if ratio is equivalent to a whole number.
+	 * @param x
+	 * @return
+	 */
+	public boolean equals(long x) {
+		Ratio n = new Ratio(x);
+		return equals(n);
+	}
+	
+	/**
+	 * Test if two ratios have the same value
+	 * @param x
+	 * @return equality
+	 */
+	public boolean equals(Ratio x) {
+		Ratio n = subtract(x);
+		return (n.getNumerator() == 0);
+	}
+	
+	/**
+	 * Test if this is a whole number or not.
+	 * @return true if a whole number, else false
+	 */
+	public boolean isWholeNumber() {
+		simplify();
+		return (denom == 1);
+	}
+	
+	/**
+	 * Test if this is a fraction
+	 * @return true if not a whole number, else false
+	 */
+	public boolean isFraction() {
+		return !(isWholeNumber());
+	}
 	
 	/**
 	 * Used during testing, prints fraction to stdout
@@ -33,8 +108,8 @@ public class Ratio {
 	 */
 	public Ratio multiply(Ratio x) {
 		Ratio n = new Ratio();
-		n.setDenominator(this.denom * x.getDenominator());
-		n.setNumerator(this.numer * x.getNumerator());
+		n.setDenominator(denom * x.getDenominator());
+		n.setNumerator(numer * x.getNumerator());
 		n.positiveDenom();
 		n.simplify();
 		return n;
@@ -47,7 +122,7 @@ public class Ratio {
 	 */
 	public Ratio multiply(long x) {
 		Ratio n = new Ratio(x);
-		return this.multiply(n);
+		return multiply(n);
 	}
 	
 	/**
@@ -58,7 +133,7 @@ public class Ratio {
 	 */
 	public Ratio divide(long x) {
 		Ratio n = new Ratio(1, x);
-		return this.multiply(n);
+		return multiply(n);
 	}
 	
 	/**
@@ -69,7 +144,7 @@ public class Ratio {
 	 */
 	public Ratio divide(Ratio x) {
 		Ratio n = new Ratio( x.getDenominator(), x.getNumerator());
-		return this.multiply(n);
+		return multiply(n);
 	}
 	
 	/**
@@ -80,9 +155,9 @@ public class Ratio {
 	 */
 	public Ratio add(Ratio x) {
 		Ratio n = new Ratio();
-		n.setDenominator(this.denom * x.getDenominator());
-		n.setNumerator(this.numer * x.getDenominator() + 
-				x.getNumerator() * this.denom);
+		n.setDenominator(denom * x.getDenominator());
+		n.setNumerator(numer * x.getDenominator() + 
+				x.getNumerator() * denom);
 		n.positiveDenom();
 		n.simplify();
 		return n;
@@ -96,7 +171,7 @@ public class Ratio {
 	 */
 	public Ratio add(long x) {
 		Ratio n = new Ratio(x);
-		return this.add(n);
+		return add(n);
 	}
 	
 	/**
@@ -106,7 +181,7 @@ public class Ratio {
 	 * @return this - subtrahend
 	 */
 	public Ratio subtract(long x) {
-		return this.add(-x);
+		return add(-x);
 	}
 	
 	/**
@@ -117,7 +192,7 @@ public class Ratio {
 	 */
 	public Ratio subtract(Ratio x) {
 		Ratio n = new Ratio(-x.getNumerator(),x.getDenominator());
-		return this.add(n);
+		return add(n);
 	}
 	
 	/**
