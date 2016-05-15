@@ -49,6 +49,42 @@ public class Ratio {
 	}
 	
 	/**
+	 * Test if greater than or equal to fraction
+	 * @param x
+	 * @return 
+	 */
+	public boolean isGTE(Ratio x) {
+		return !(isLessThan(x));
+	}
+	
+	/**
+	 * Test if greater than or equal to whole number
+	 * @param x
+	 * @return 
+	 */
+	public boolean isGTE(long x) {
+		return !(isLessThan(x));
+	}
+	
+	/**
+	 * Test if less than or equal to fraction
+	 * @param x
+	 * @return 
+	 */
+	public boolean isLTE(Ratio x) {
+		return !(isGreaterThan(x));
+	}
+	
+	/**
+	 * Test if less than or equal to whole number
+	 * @param x
+	 * @return 
+	 */
+	public boolean isLTE(long x) {
+		return !(isGreaterThan(x));
+	}
+	
+	/**
 	 * Test if ratio is equivalent to a whole number.
 	 * @param x
 	 * @return
