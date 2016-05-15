@@ -1,3 +1,12 @@
+/**
+ * Ratio
+ * 
+ * Version 1.0
+ * 
+ * Last Update: May 15, 2016
+ * 
+ */
+
 package test;
 
 /**
@@ -10,6 +19,47 @@ public class Ratio {
 	private long denom;
 	private long numer;
 
+	/*
+	 * CONSTRUCTORS
+	 */
+	
+	/**
+	 * Default constructor makes a fraction of 0/1.
+	 */
+	public Ratio() {
+		denom = 1;
+		numer = 0;
+	}
+	
+	/**
+	 * Construct a whole number fraction of x/1.
+	 * @param x
+	 */
+	public Ratio(long x) {
+		denom = 1;
+		numer = x;
+	}
+	
+	/**
+	 * Construct a fraction of x/y, y can't be 0
+	 * If y is 0, it will be turned into a 1.
+	 * @param x
+	 * @param y
+	 */
+	public Ratio(long x, long y) {
+		if( y != 0 ) {
+			denom = y;
+		} else {
+			// This should be an error
+			denom = 1;
+		}
+		numer = x;
+	}
+	
+	/*
+	 * COMPARISON METHODS
+	 */
+	
 	/**
 	 * Test if is less than
 	 */
@@ -121,6 +171,10 @@ public class Ratio {
 		return !(isWholeNumber());
 	}
 	
+	/*
+	 * FORMATTING AND STRING METHODS
+	 */
+	
 	/**
 	 * Used during testing, prints fraction to stdout
 	 */
@@ -136,6 +190,10 @@ public class Ratio {
 	public String toString() {
 		return (numer + "/" + denom);
 	}
+	
+	/*
+	 * MATH OPERATION METHODS
+	 */
 	
 	/**
 	 * Find the product of two ratios
@@ -231,6 +289,10 @@ public class Ratio {
 		return add(n);
 	}
 	
+	/*
+	 * GET & SET METHODS
+	 */
+	
 	/**
 	 * Set the numerator of a ratiotic number
 	 * @param x
@@ -267,6 +329,10 @@ public class Ratio {
 		return denom;
 	}
 	
+	/*
+	 * PRIVATE METHODS
+	 */
+	
 	/**
 	 * Internal function to find the greatest common
 	 * factor for the purposes of simplifying the ratio.
@@ -285,17 +351,6 @@ public class Ratio {
 	}
 	
 	/**
-	 * Internal function that will simplify the fraction
-	 * by dividing the numerator and denominator by their
-	 * greatest common factor.
-	 */
-	private void simplify() {
-		long y = gcf();
-		denom /= y;
-		numer /= y;
-	}
-	
-	/**
 	 * Check if the denominator is negative, if it is then
 	 * multiply by -1/-1 to make it positive.
 	 */
@@ -307,35 +362,13 @@ public class Ratio {
 	}
 	
 	/**
-	 * Default constructor makes a fraction of 0/1.
+	 * Internal function that will simplify the fraction
+	 * by dividing the numerator and denominator by their
+	 * greatest common factor.
 	 */
-	public Ratio() {
-		denom = 1;
-		numer = 0;
-	}
-	
-	/**
-	 * Construct a whole number fraction of x/1.
-	 * @param x
-	 */
-	public Ratio(long x) {
-		denom = 1;
-		numer = x;
-	}
-	
-	/**
-	 * Construct a fraction of x/y, y can't be 0
-	 * If y is 0, it will be turned into a 1.
-	 * @param x
-	 * @param y
-	 */
-	public Ratio(long x, long y) {
-		if( y != 0 ) {
-			denom = y;
-		} else {
-			// This should be an error
-			denom = 1;
-		}
-		numer = x;
+	private void simplify() {
+		long y = gcf();
+		denom /= y;
+		numer /= y;
 	}
 }
